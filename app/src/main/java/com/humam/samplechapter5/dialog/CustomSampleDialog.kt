@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import com.humam.samplechapter5.databinding.LayoutDialogSampleBinding
 
-class CustomSampleDialog : DialogFragment() {
+class CustomSampleDialog(val title: String) : DialogFragment() {
+
     var binding: LayoutDialogSampleBinding? = null
 
     override fun onCreateView(
@@ -23,7 +25,7 @@ class CustomSampleDialog : DialogFragment() {
         val width = ViewGroup.LayoutParams.MATCH_PARENT
         val height = ViewGroup.LayoutParams.WRAP_CONTENT
         dialog?.window?.setLayout(width, height)
-
+        binding?.tvTitle?.text = title
         binding?.btnClose?.setOnClickListener {
             dialog?.dismiss()
         }

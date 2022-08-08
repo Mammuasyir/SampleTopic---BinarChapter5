@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.humam.samplechapter5.R
+import com.humam.samplechapter5.activity.SecondActivity.Companion.KEY_NAME_DATA
 import com.humam.samplechapter5.databinding.ActivitySampleIntentBinding
 import com.humam.samplechapter5.model.User
 import com.humam.samplechapter5.model.UserParcelize
@@ -13,12 +14,6 @@ import com.humam.samplechapter5.model.UserParcelize
 class SampleIntentActivity : AppCompatActivity() {
 
     var binding: ActivitySampleIntentBinding? = null
-
-    companion object {
-        val KEY_NAME_DATA = "dataFromMainPage"
-        val KEY_USER = "user"
-        val KEY_USER_PARCELIZE = "userParcelize"
-    } // companion object untuk apa yang di dalamnya bisa diakses di luar kelasnya
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +34,7 @@ class SampleIntentActivity : AppCompatActivity() {
                     }
                 }catch (e: Exception) {
                     Log.d("Error Intent","Aplikasi tidak ditemukan")
-                    Intent(Intent.ACTION_VIEW).apply {
-                        data = Uri.parse("https://play.google.com/store/apps/details?id=com.whatsapp")
+                    Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.whatsapp")).apply {
                         startActivity(this)
                     }
                 }
@@ -55,9 +49,11 @@ class SampleIntentActivity : AppCompatActivity() {
                 val userParcelize = UserParcelize("Humam", "Laki2")
 
                 val intentPage2 = Intent(this@SampleIntentActivity, SecondActivity::class.java)
-                intentPage2.putExtra(KEY_NAME_DATA, "Hello from Page 1")
-                intentPage2.putExtra(KEY_USER,user)
-                intentPage2.putExtra(KEY_USER_PARCELIZE,userParcelize)
+                val bundle = Bundle()
+                bundle.putString(KEY_NAME_DATA, "Hello from Page 1")
+//                intentPage2.putExtra(KEY_NAME_DATA, "Hello from Page 1")
+//                intentPage2.putExtra(KEY_USER,user)
+//                intentPage2.putExtra(KEY_USER_PARCELIZE,userParcelize)
                 startActivity(intentPage2)
                 //
             }
